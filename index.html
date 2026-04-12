@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Battle Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="../pics/logo.png">
+</head>
+
+<body>
+
+<div class="container left-attacks">
+  <h1>Pokemon Battle</h1>
+
+  <div class="battle-direction">
+    <span>Покемон 1</span>
+    <span class="arrow" id="arrow">→</span>
+    <span>Покемон 2</span>
+  </div>
+
+  <div class="controls">
+    <button id="swapBtn">🔄 Зміна ролей/сторін</button>
+  </div>
+
+  <table>
+    <tbody>
+
+      <tr>
+        <td>Тип атаки 🧬</td>
+        <td class="left-col">
+          <select id="type1"></select>
+        </td>
+        <td class="right-col">
+          <select id="type2"></select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Рівень атаки ⚡</td>
+        <td class="left-col">
+          <select id="al1">
+            <option value="-1" selected>I</option>
+            <option value="0">II</option>
+            <option value="1">III</option>
+            <option value="2">IV</option>
+            <option value="3">V</option>
+          </select>
+        </td>
+        <td class="right-col">
+          <select id="al2">
+            <option value="-1" selected>I</option>
+            <option value="0">II</option>
+            <option value="1">III</option>
+            <option value="2">IV</option>
+            <option value="3">V</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Здоров'я 🩸</td>
+        <td class="left-col"><input type="number" value="1" min="0" step="0.1" id="unit1hp"></td>
+        <td class="right-col"><input type="number"value="1" min="0" step="0.1" id="unit2hp"></td>
+      </tr>
+
+      <tr>
+        <td>Атака / захист ⚔️</td>
+        <td class="left-col"><input type="number" value="0" min="0" step="1" id="atk1"></td>
+        <td class="right-col"><input type="number" value="0" min="0" step="1" id="atk2"></td>
+      </tr>
+
+      <tr>
+        <td>Витримка 🍜</td>
+        <td class="left-col"><input type="number" value="0" min="0" step="0.1" id="res1"></td>
+        <td class="right-col"><input type="number" value="0" min="0" step="0.1" id="res2"></td>
+      </tr>
+
+      <tr>
+        <td>Пасивна броня 🛡️</td>
+        <td class="left-col"><input type="number" value="0" min="0" step="0.1" id="def1" ></td>
+        <td class="right-col"><input type="number" value="0" min="0" step="0.1" id="def2" ></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="battle-action">
+    <button id="battleBtn" class="primary">⚔️ ДО БОЮ !!!</button>
+  </div>
+
+  <!-- 🔥 ВОЗВРАЩАЕМ РЕЗУЛЬТАТ -->
+  <div class="result">
+    <h2>Результат</h2>
+    <p id="resultText">Поки ніяких змін не відбулося</p>
+
+    <button id="applyBtn" class="apply hidden">
+      Застосувати шкоду
+    </button>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
