@@ -96,25 +96,27 @@ document.getElementById("battleBtn").onclick = () => {
   let damage = 0;
   let text = "";
 
+  let dam1 = izs1 * mult1;
+  let dam2 = izs2 * mult2;
+
   if (isLeftAttacking) {
     if (def2 > 0) {
-      izs2 = izs2 + def2;
+      dam2 += def2;
     } 
-    damage = izs1 * mult1 - izs2 * mult2;
-    if (izs2 < 0) izs2 = "відсутня";
-    text = `Ліва сторона атакує ${izs1 * mult1} \n Контратака правої: ${izs2 * mult2}`;
+    damage = dam1 - dam2;
+    if (dam2 < 0) dam2 = "відсутня";
+    text = `Ліва сторона атакує ${dam1} \n Контратака правої: ${dam2}`;
 
 // что тут происходит почему 0 превращается в -1??? какого хуя урон то ли пропадает то ли появляется
 
 
   } else {
     if (def1 > 0) {
-      izs1 = izs1 + def1;
-      // console.log(izs1);
+      dam1 += def1;
     } 
-    damage = izs2 * mult2 - izs1 * mult1;
-    if (izs1 < 0) izs1 = "відсутня";
-    text = `Права сторона атакує ${izs2 * mult2} \n Контратака лівої: ${izs1 * mult1}`;
+    damage = dam2 - dam1;
+    if (dam1 < 0) dam1 = "відсутня";
+    text = `Права сторона атакує ${dam2} \n Контратака лівої: ${dam1}`;
   }
 
   // оценка эфвективности атаки
