@@ -107,9 +107,6 @@ document.getElementById("battleBtn").onclick = () => {
     if (dam2 < 0) dam2 = "відсутня";
     text = `Ліва сторона атакує ${dam1} \n Контратака правої: ${dam2}`;
 
-// что тут происходит почему 0 превращается в -1??? какого хуя урон то ли пропадает то ли появляется
-
-
   } else {
     if (def1 > 0) {
       dam1 += def1;
@@ -127,11 +124,23 @@ document.getElementById("battleBtn").onclick = () => {
   if (usedMult <= 1 || (damage <= 1 && damage > 0)) effectiveness = "😐 Могло б бути краще, спробуйте щось змінити в цьому житті, наприклад - обрати інший тип  атак";
   if (usedMult === 0 || damage <= 0) effectiveness = "❌ Не працює, аж зовсім, треба щось змінювати в цьому житті";
 
-  damage = Math.max(0, damage);
+
+  //дамажить может и в обратную сторону
   lastDamage = damage;
+  let damageResultText = "";
+
+  if (damage > 0) {
+    damageResultText = `Шкода для ${isLeftAttacking ? "правої" : "лівої"} сторони: ${damage}`;
+  }
+  else if (damage < 0) {
+    damageResultText = `Контратака успішна!\nШкода для ${isLeftAttacking ? "лівої" : "правої"} сторони: ${Math.abs(damage)}`;
+  }
+  else {
+    damageResultText = `Ніхто не отримав шкоди`;
+  }
 
   document.getElementById("resultText").innerText =
-    `${text} \n Шкода: ${damage} \n ${effectiveness}`;
+    `${text }\n ${damageResultText} \n ${effectiveness}`;
 
   document.getElementById("applyBtn").classList.remove("hidden");
 };
@@ -143,17 +152,31 @@ document.getElementById("applyBtn").onclick = () => {
 
   let changeSide = true;
 
-  if (isLeftAttacking) {
-    const hp = document.getElementById("unit2hp");
-    hp.value = Math.max(0, (hp.value || 0) - lastDamage);
-    if (lastDamage >= res2){
-      changeSide = false;
+  if (lastDamage > 0) {
+    if (isLeftAttacking) {
+      const hp = document.getElementById("unit2hp");
+      hp.value = Math.max(0, (hp.value || 0) - lastDamage);
+
+      if (lastDamage >= res2) changeSide = false;
+    } else {
+      const hp = document.getElementById("unit1hp");
+      hp.value = Math.max(0, (hp.value || 0) - lastDamage);
+
+      if (lastDamage >= res1) changeSide = false;
     }
-  } else {
-    const hp = document.getElementById("unit1hp");
-    hp.value = Math.max(0, (hp.value || 0) - lastDamage);
-    if (lastDamage >= res1) {
-      changeSide = false;
+  } 
+  else if (lastDamage < 0) {
+    const dmg = Math.abs(lastDamage);
+    if (isLeftAttacking) {
+      const hp = document.getElementById("unit1hp");
+      hp.value = Math.max(0, (hp.value || 0) - dmg);
+
+      if (dmg >= res1) changeSide = false;
+    } else {
+      const hp = document.getElementById("unit2hp");
+      hp.value = Math.max(0, (hp.value || 0) - dmg);
+
+      if (dmg >= res2) changeSide = false;
     }
   }
 
