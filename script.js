@@ -100,9 +100,9 @@ document.getElementById("battleBtn").onclick = () => {
     if (def2 > 0) {
       izs2 = izs2 + def2;
     } 
-    damage = izs1 * mult1 - izs2;
+    damage = izs1 * mult1 - izs2 * mult2;
     if (izs2 < 0) izs2 = "відсутня";
-    text = `Ліва сторона атакує ${izs1 * mult1} \n Контратака правої: ${izs2}`;
+    text = `Ліва сторона атакує ${izs1 * mult1} \n Контратака правої: ${izs2 * mult2}`;
 
 // что тут происходит почему 0 превращается в -1??? какого хуя урон то ли пропадает то ли появляется
 
@@ -112,9 +112,9 @@ document.getElementById("battleBtn").onclick = () => {
       izs1 = izs1 + def1;
       // console.log(izs1);
     } 
-    damage = izs2 * mult2 - izs1;
+    damage = izs2 * mult2 - izs1 * mult1;
     if (izs1 < 0) izs1 = "відсутня";
-    text = `Права сторона атакує ${izs2 * mult2} \n Контратака лівої: ${izs1}`;
+    text = `Права сторона атакує ${izs2 * mult2} \n Контратака лівої: ${izs1 * mult1}`;
   }
 
   // оценка эфвективности атаки
